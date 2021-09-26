@@ -19,8 +19,6 @@ public class ReceiveShield : MonoBehaviour
 
     private Coroutine coroutine;
 
-    private const string DESTROYED_SHIELD = "DestroyedShield";
-
     /// <summary>
     /// Активация щита
     /// </summary>
@@ -39,7 +37,6 @@ public class ReceiveShield : MonoBehaviour
     public void DisactivateShield()
     {
         activatedShield.SetActive(false);
-        ObjectPoolController.Instance.CreateObject(DESTROYED_SHIELD, transform.position);
         isActivated = false;
 
         if (coroutine != null)

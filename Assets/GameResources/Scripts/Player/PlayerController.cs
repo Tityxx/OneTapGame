@@ -29,8 +29,6 @@ public class PlayerController : MonoBehaviour
     private Transform rayTransform;
     [SerializeField]
     private float rayDistance = 1;
-    [SerializeField]
-    private string dieEffectId = "Explosion";
 
     private const string ANIM_STATE = "Run";
 
@@ -122,7 +120,6 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         OnPlayerDie();
-        ObjectPoolController.Instance.CreateObject(dieEffectId, transform.position);
         gameObject.SetActive(false);
     }
 

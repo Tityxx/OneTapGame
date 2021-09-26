@@ -8,7 +8,7 @@ using UnityEngine;
 public class TrackSpawner : MonoBehaviour
 {
     [SerializeField]
-    private List<string> tracksId;
+    private List<TrackSize> trackPrefabs;
     [SerializeField]
     private int trackCount = 10;
     [SerializeField]
@@ -20,17 +20,14 @@ public class TrackSpawner : MonoBehaviour
 
     private Vector3 lastPosition = Vector3.zero;
 
-    private List<TrackSize> listTracks = new List<TrackSize>();
-    private List<string> availableId;
-    private string lastTrackId = string.Empty;
+    private List<TrackSize> tracks = new List<TrackSize>();
 
-    private void Start()
+    private void Awake()
     {
         PlayerController.OnPlayerDie += OnPlayerDie;
 
-        availableId = new List<string>(tracksId);
         lastTrack.Magnitude = lastTrack.gameObject.transform.position.magnitude;
-        listTracks.Add(lastTrack);
+        tracks.Add(lastTrack);
         for (int i = 0; i < trackCount; i++)
         {
             CreateTrack();
@@ -44,19 +41,19 @@ public class TrackSpawner : MonoBehaviour
 
     private void Update()
     {
-        int currCount = listTracks.Count;
+        int currCount = tracks.Count;
 
-        for (int i = 0; i < listTracks.Count; i++)
+        for (int i = 0; i < tracks.Count; i++)
         {
-            if (listTracks[i].Magnitude + distanceToRemove < player.position.magnitude)
+            if (tracks[i].Magnitude + distanceToRemove < player.position.magnitude)
             {
-                ObjectPoolController.Instance.FreeObject(listTracks[i].gameObject);
-                listTracks.RemoveAt(i);
+                Destroy(tracks[i].gameObject);
+                tracks.RemoveAt(i);
                 i--;
             }
         }
 
-        for (int i = 0; i < currCount - listTracks.Count; i++)
+        for (int i = 0; i < currCount - tracks.Count; i++)
         {
             CreateTrack();
         }
@@ -64,26 +61,10 @@ public class TrackSpawner : MonoBehaviour
 
     private void CreateTrack()
     {
-        string trackId = availableId[Random.Range(0, availableId.Count)];
-
-        if (tracksId.Count > 1)
-        {
-            availableId.Remove(trackId);
-            if (lastTrackId != string.Empty)
-            {
-                availableId.Add(lastTrackId);
-            }
-
-            lastTrackId = trackId;
-        }
-        
-        GameObject go = ObjectPoolController.Instance.CreateObject(trackId, lastPosition += lastTrack.Position);
-        if (go.TryGetComponent(out TrackSize track))
-        {
-            lastTrack = track;
-            lastTrack.Magnitude = go.transform.position.magnitude;
-            listTracks.Add(lastTrack);
-        }
+        TrackSize track = Instantiate(trackPrefabs[Random.Range(0, trackPrefabs.Count)], lastPosition += lastTrack.Position, Quaternion.identity);
+        lastTrack = track;
+        lastTrack.Magnitude = track.transform.position.magnitude;
+        tracks.Add(lastTrack);
     }
 
     private void OnPlayerDie()

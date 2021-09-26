@@ -13,6 +13,6 @@ public class SimpleSceneLoader : AbstractButton
 
     protected override void OnButtonClick()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName);
     }
 }

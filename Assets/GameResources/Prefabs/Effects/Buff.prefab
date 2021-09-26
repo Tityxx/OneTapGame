@@ -9359,7 +9359,7 @@ GameObject:
   - component: {fileID: 2350145370297683174}
   - component: {fileID: 3044309561712542787}
   - component: {fileID: 6820185746829353434}
-  - component: {fileID: 2510543276498323663}
+  - component: {fileID: -2617489601226404139}
   m_Layer: 0
   m_Name: Buff
   m_TagString: Untagged
@@ -14025,7 +14025,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &2510543276498323663
+--- !u!114 &-2617489601226404139
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14034,7 +14034,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2350145370297258182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3460759422260464b97ba2c7109de166, type: 3}
+  m_Script: {fileID: 11500000, guid: 8493982ac8853f5469f2a3d80bd6e902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useRealTime: 0
   delay: 2

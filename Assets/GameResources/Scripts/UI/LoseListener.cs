@@ -5,24 +5,14 @@ using UnityEngine;
 /// <summary>
 /// Обработка события проигрыша
 /// </summary>
-public class LoseListener : MonoBehaviour
+public class LoseListener : AbstractPlayerDieHandler
 {
     [SerializeField]
     private GameObject loseWindow;
     [SerializeField]
     private GameObject gameWindow;
 
-    private void Awake()
-    {
-        PlayerController.OnPlayerDie += OnPlayerDie;
-    }
-
-    private void OnDestroy()
-    {
-        PlayerController.OnPlayerDie -= OnPlayerDie;
-    }
-
-    private void OnPlayerDie()
+    protected override void OnPlayerDie()
     {
         loseWindow.SetActive(true);
         gameWindow.SetActive(false);
