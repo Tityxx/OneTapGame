@@ -10,6 +10,8 @@ public class PlayerHealth : MonoBehaviour
 {
     public static event Action<int> OnPlayerChangeHealth = delegate { };
 
+    public int MaxHealth => maxHealth;
+
     public int Health
     {
         get
@@ -18,11 +20,11 @@ public class PlayerHealth : MonoBehaviour
         }
         set
         {
-            if (invulnerable)
+            if (invulnerable && health > value)
             {
                 return;
             }
-            if (shield.isActivated)
+            if (shield.isActivated && health > value)
             {
                 shield.DisactivateShield();
                 return;
@@ -31,9 +33,9 @@ public class PlayerHealth : MonoBehaviour
             {
                 StartCoroutine(DoInvulnerable());
             }
-            health = Mathf.Clamp(value, int.MinValue, maxHealth);
+            int prevHp = health;
+            health = Mathf.Clamp(value, 0, maxHealth);
             OnPlayerChangeHealth(health);
-
             if (health <= 0)
             {
                 player.Die();

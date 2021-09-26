@@ -23,7 +23,7 @@ public abstract class AbstractButton : MonoBehaviour
 
     protected virtual void OnDisable()
     {
-        btn.onClick.RemoveListener(OnButtonClick);
+        btn?.onClick.RemoveListener(OnButtonClick);
     }
 
     protected abstract void OnButtonClick();

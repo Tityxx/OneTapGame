@@ -20,10 +20,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float speed = 1f;
     [SerializeField]
-    private float timeToIncSpeed = 5f;
-    [SerializeField]
-    private float incSpeed = 0.2f;
-    [SerializeField]
     private float jumpForce = 4000f;
     [SerializeField]
     private Transform rayTransform;

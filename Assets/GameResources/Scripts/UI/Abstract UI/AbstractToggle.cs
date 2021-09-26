@@ -23,7 +23,7 @@ public abstract class AbstractToggle : MonoBehaviour
 
     protected virtual void OnDisable()
     {
-        toggle.onValueChanged.RemoveListener(OnValueChanged);
+        toggle?.onValueChanged.RemoveListener(OnValueChanged);
     }
 
     protected abstract void OnValueChanged(bool value);

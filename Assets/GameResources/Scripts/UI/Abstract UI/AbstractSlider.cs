@@ -23,7 +23,7 @@ public abstract class AbstractSlider : MonoBehaviour
 
     protected virtual void OnDisable()
     {
-        slider.onValueChanged.RemoveListener(OnValueChanged);
+        slider?.onValueChanged.RemoveListener(OnValueChanged);
     }
 
     protected abstract void OnValueChanged(float value);

@@ -14,7 +14,7 @@ public class DestroyWithDelay : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        StartCoroutine(WaitForDestroy());
     }
 
     private void OnDisable()
